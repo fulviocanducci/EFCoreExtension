@@ -13,37 +13,45 @@ namespace Microsoft.EntityFrameworkCore
               .GetMethod(nameof(EFCore.DateDiff)))
               .HasTranslation(args =>
               {
-                  var newArgs = args.ToList();
-                  newArgs[0] = new SqlFragmentExpression(((ConstantExpression)newArgs.First()).Value.ToString());
+                  var arguments = args.ToList();
+                  arguments[0] = new SqlFragmentExpression(((ConstantExpression)arguments.First()).Value.ToString());
                   return new SqlFunctionExpression(
                       "DATEDIFF",
                       typeof(int),
-                      newArgs);
+                      arguments);
               });
         }
 
-        public static int? DateDiff(DatePart datePart, DateTime? start, DateTime? end)
+        public static int? DateDiff(DatePart datePart, object start, object end)
         {
+            var startDate = start.GetType() == typeof(DateTime)
+                ? (DateTime)start
+                : (DateTimeOffset)start;
+
+            var endDate = end.GetType() == typeof(DateTime)
+                ? (DateTime)end
+                : (DateTimeOffset)end;
+
             switch (datePart)
             {
                 case DatePart.day:
-                    return EFFunctions.DateDiffDay(start, end);
+                    return EFFunctions.DateDiffDay(startDate, endDate);
                 case DatePart.month:
-                    return EFFunctions.DateDiffMonth(start, end);
+                    return EFFunctions.DateDiffMonth(startDate, endDate);
                 case DatePart.year:
-                    return EFFunctions.DateDiffYear(start, end);
+                    return EFFunctions.DateDiffYear(startDate, endDate);
                 case DatePart.hour:
-                    return EFFunctions.DateDiffHour(start, end);
+                    return EFFunctions.DateDiffHour(startDate, endDate);
                 case DatePart.minute:
-                    return EFFunctions.DateDiffMinute(start, end);
+                    return EFFunctions.DateDiffMinute(startDate, endDate);
                 case DatePart.second:
-                    return EFFunctions.DateDiffSecond(start, end);
+                    return EFFunctions.DateDiffSecond(startDate, endDate);
                 case DatePart.millisecond:
-                    return EFFunctions.DateDiffMillisecond(start, end);
+                    return EFFunctions.DateDiffMillisecond(startDate, endDate);
                 case DatePart.microsecond:
-                    return EFFunctions.DateDiffMicrosecond(start, end);
+                    return EFFunctions.DateDiffMicrosecond(startDate, endDate);
                 case DatePart.nanosecond:
-                    return EFFunctions.DateDiffNanosecond(start, end);
+                    return EFFunctions.DateDiffNanosecond(startDate, endDate);
                 default:
                     throw new Exception("Please enter a valid DATEPART!");
             }
