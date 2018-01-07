@@ -18,23 +18,6 @@ namespace Ralms.Microsoft.EntityFrameworkCore.Tests
 }
 ```
 
-# Setting
-
-```csharp
-using Microsoft.EntityFrameworkCore;
-
-namespace Ralms.Microsoft.EntityFrameworkCore.Tests
-{
-    public class SampleContext : DbContext
-    {
-        protected override void OnModelCreating(ModelBuilder model)
-        {
-            model.CreateFunctionDateDiff();
-        }
-    }
-}
-```
-
 # Sample
 
 ```csharp
