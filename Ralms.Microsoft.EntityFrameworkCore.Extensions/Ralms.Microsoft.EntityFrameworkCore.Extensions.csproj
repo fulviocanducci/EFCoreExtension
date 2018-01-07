@@ -4,8 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.0.1</Version>
     <Description>Extension, to translate DATEDIFF to SQL Server (Server / Client Eval)</Description>
-    <PackageProjectUrl>https://github.com/ralmsdeveloper/extensiondatediff</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ralmsdeveloper/efcoreextension</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/ralmsdeveloper/efcoreextension</RepositoryUrl>
+    <PackageTags>DATEDIFF, EF CORE 2, SQL SERVER, RALMSDEVELOPER</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Authors>Rafael Almeida</Authors>
+    <Company>ralms@ralms.net</Company>
   </PropertyGroup>
 
   <ItemGroup>
